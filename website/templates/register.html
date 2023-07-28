@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title%} Register {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-md-3 mt-5">
+
+
+            {% if form.errors %}
+            <div class="messages">
+                Your form has errors:
+                {% for field in form %}
+                {% if field.errors %}
+                <div class="alert alert-danger alert-fade" role="alert">  {{ field.errors }}</div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+            {% if not user.is_authenticated %}
+            <h1>Register</h1>
+            <form method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+                <!-- <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="username" name="username" class="form-control" id="username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="password">
+                </div> -->
+
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-secondary">Register</button>
+            </form>
+            {% endif %}
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
