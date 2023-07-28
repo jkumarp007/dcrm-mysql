@@ -4,8 +4,65 @@
 {% block content %}
 <h1>Home</h1>
 
-<div>
+<div class="container">
     <div class="row">
+        <div class="col">
+            <h1>Records</h1>
+        </div>
+        <div class="col ">
+            <div class="text-right">
+                <a class="btn btn-sm btn-secondary" href="{% url 'record_add' %}">Add New</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+
+            {% if user.is_authenticated %}
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zipcode</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+
+                    {% if records.count %}
+                    {% for record in records %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ record.first_name }} {{ record.last_name }}</td>
+                        <td>{{ record.email }}</td>
+                        <td>{{ record.phone }}</td>
+                        <td>{{ record.city }}</td>
+                        <td>{{ record.state }}</td>
+                        <td>{{ record.zipcode }}</td>
+                        <td>{{ record.created_at }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-secondary" href="{% url 'record_view'  record.id %}">View</a>
+                            <a class="btn btn-sm btn-secondary" href="{% url 'record_edit'  record.id %}">Edit</a>
+                            <a class="btn btn-sm btn-danger" href="{% url 'record_delete'  record.id %}">Delate</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="9" align="center">No Data</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            {% endif %}
+
+
+        </div>
 
     </div>
 </div>

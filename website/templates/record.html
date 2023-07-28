@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title%}Record{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Record #{{ record.id }}</h1>
+        </div>
+        <div class="col ">
+            <div class="text-right">
+
+                <a class="btn btn-sm btn-secondary" href="{% url 'home' %}">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+
+            {% if user.is_authenticated %}
+
+            <div class="card">
+                <div class="card-header">{{ record.first_name }} {{ record.last_name }}</div>
+                <div class="card-body">
+                    <div class="card-text">
+
+                        <div> <strong> ID </strong> :#{{ record.id }} </div>
+                        <div> <strong> Name </strong> :{{ record.first_name }} {{ record.last_name }} </div>
+                        <div> <strong> Email </strong> :{{ record.email }} </div>
+                        <div> <strong> Phone </strong> :{{ record.phone }} </div>
+                        <div> <strong> Address </strong> :{{ record.address }} </div>
+                        <div> <strong> City </strong> :{{ record.city }} </div>
+                        <div> <strong> State </strong> :{{ record.state }} </div>
+                        <div> <strong> Zipcode </strong> :{{ record.zipcode }} </div>
+                        <div> <strong> Date </strong> :{{ record.created_at }} </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
